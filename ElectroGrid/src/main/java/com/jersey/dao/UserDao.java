@@ -2,6 +2,7 @@ package com.jersey.dao;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -9,6 +10,7 @@ import java.util.Random;
 
 import com.jersey.bean.UserBean;
 import com.jersey.dbconn.DbConnectionProvider;
+import com.jersey.utils.SendMail;
 
 public class UserDao 
 {
@@ -19,7 +21,7 @@ public class UserDao
 		
 		try {
 			
-			PreparedStatement ps1 = con.prepareStatement("select email from user where email=?");
+			PreparedStatement ps1 = con.prepareStatement("select * from user where email=?");
 			ps1.setString(1, rs.getEmail());
 			ResultSet rrs = ps1.executeQuery();
 			
@@ -39,14 +41,20 @@ public class UserDao
 				int i = ps.executeUpdate();
 				if(i>0)
 				{
+					boolean isSend = SendMail.sendMail(rs.getEmail(), "generated: ", "OTP"+otp);
+					if(isSend==true) {
 					return "Successfully Registered!!!";
+					}else {
+						return "Error while sending the email!!";
+					}
 				}
 				else
 				{
 					return "Error when registration process!!!";
 				}
 				
-			}
+				}
+			
 		}
 		catch (Exception e)
 		{
