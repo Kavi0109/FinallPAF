@@ -29,6 +29,7 @@ import com.google.gson.JsonParser;
 //import com.google.gson.JsonParser;
 
 import com.jersey.bean.UserBean;
+import com.jersey.dao.LoginDao;
 import com.jersey.dao.UserDao;
 
 
@@ -69,12 +70,15 @@ public class UserServices
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String loginUser(String userdata) 
+	public String loginUser(String userdata) throws JsonParseException, JsonMappingException, IOException
 	{
-		String str="hello";
-
-		
-		
+		String str=null;
+		if(null!=userdata)
+		{
+		ObjectMapper mapper = new ObjectMapper();
+		UserBean userbean = mapper.readValue(userdata, UserBean.class);
+		str = LoginDao.LoginDao(userbean);
+		}
 		return str;
 	}
 	
