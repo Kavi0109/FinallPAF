@@ -39,6 +39,9 @@ public class SendMail
 	
 	private boolean sendSimpleMail() 
 	{
+		final String username="kaviperera0109@gmail.com";
+		final String password = "Kavimin1#";
+		
 		boolean isSent = false;
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -51,7 +54,7 @@ public class SendMail
 		Session session = Session.getInstance(props, new javax.mail.Authenticator(){
 			
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("verifyrentbasera@gmail.com","gmail@password");
+				return new PasswordAuthentication(username, password);
 			}
 });
 		
