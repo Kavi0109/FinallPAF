@@ -12,46 +12,51 @@ public class LoginDao
 {
 	public static String LoginDao(UserBean rs)
 	{
-		//int otp = new Random().nextInt(345);
+		String status;
+		
 		Connection con = DbConnectionProvider.getConnection();
 		
 		try {
 			
-			PreparedStatement ps1 = con.prepareStatement("select * from user where name=? and email=?");
-			ps1.setString(1, rs.getName());
-			ps1.setString(2, rs.getEmail());
+			PreparedStatement ps1 = con.prepareStatement("select * from users where email=? and pass=?");
+			ps1.setString(1, rs.getEmail());
+			ps1.setString(2, rs.getPass());
 			ResultSet rrs = ps1.executeQuery();
 			
 			if(rrs.next())
 			{
-				return "Login Success!!!";
-			}
-		else {
-				/*PreparedStatement ps = con.prepareStatement("insert into user values(?,?,?,?,?,?)");
-				ps.setString(1, rs.getName());
-				ps.setString(2, rs.getEmail());
-				ps.setString(3, rs.getPass());
-				ps.setString(4, rs.getMobile());
-				ps.setInt(5, otp);
-				ps.setString(6, "inactive");
+				status = rrs.getString("status");
 				
-				int i = ps.executeUpdate();
-				if(i>0)
+				if(status.equals("active"))
 				{
-					return "Successfully Registered!!!";
-				}
-				else
-				{*/
-					return "Login Failed!!!";
+					PreparedStatement ps2 = con.prepareStatement("select * from users where email=? and pass=?");
+					ps2.setString(1, rs.getEmail());
+					ps2.setString(2, rs.getPass());
+					ResultSet rrs2 = ps1.executeQuery();
+					
+					if(rrs2.next()) {
+						return "Login Success!!!";
+					}
+					else {
+						return "fail";
+					}
+					
 				}
 				
-			//}
+				return "Please verify the user!!!!";
+			}
+			else 
+			{
+					return "Login Failed!!!";
+			}
+				
+			
 		}
 		catch (Exception e)
 		{
 			System.out.println(e);
 		}
 		
-		return "Failed to register";
+		return "Failed to login!!!";
 	}
 }

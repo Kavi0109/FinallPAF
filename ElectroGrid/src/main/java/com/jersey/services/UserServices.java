@@ -21,8 +21,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.jersey.bean.OtpBean;
 
 //import com.google.gson.JsonElement;
 //import com.google.gson.JsonObject;
@@ -30,6 +32,7 @@ import com.google.gson.JsonParser;
 
 import com.jersey.bean.UserBean;
 import com.jersey.dao.LoginDao;
+import com.jersey.dao.OtpDao;
 import com.jersey.dao.UserDao;
 
 
@@ -83,8 +86,44 @@ public class UserServices
 	}
 	
 	
+	@Path("/verify")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getVerify(String userdata) throws JsonParseException, JsonMappingException, IOException
+	{
+		OtpBean o = null;
+		JsonParser jsonParser = new JsonParser();
+		JsonElement jsonElement = jsonParser.parse(userdata);
+		if(jsonElement.isJsonObject())
+		{
+			JsonObject jsonObject = jsonElement.getAsJsonObject();
+			o = new OtpBean(jsonObject.get("otp").getAsString());
+		}
+		
+		OtpDao otpDao = new OtpDao();
+		String msg = otpDao.verifyotp(o);
+		
+		if(msg.equals("User_Activated!!"))
+		{
+			return "User Activated!!!";
+		}
+		
+		else if(msg.equals("User_Not_Activated!!!"))
+		{
+			return "User Not Activated";
+		}
+		
+		else
+		{
+			return "Invalid OTP";
+		}
+		
+	}
+	
+	
 	@PUT
-	@Path("/")
+	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_HTML)
 	public String updateUser(String userdata)
@@ -105,7 +144,7 @@ public class UserServices
 	
 	
 	@DELETE
-	@Path("/")
+	@Path("/delete")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.TEXT_HTML)
 	public String deleteUser(String userdata)

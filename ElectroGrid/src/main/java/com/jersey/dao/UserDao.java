@@ -17,11 +17,12 @@ public class UserDao
 	public static String registerDao(UserBean rs)
 	{
 		int otp = new Random().nextInt(345);
+		int accountNo = new Random().nextInt(1000);
 		Connection con = DbConnectionProvider.getConnection();
 		
 		try {
 			
-			PreparedStatement ps1 = con.prepareStatement("select * from user where email=?");
+			PreparedStatement ps1 = con.prepareStatement("select * from users where email=?");
 			ps1.setString(1, rs.getEmail());
 			ResultSet rrs = ps1.executeQuery();
 			
@@ -30,18 +31,19 @@ public class UserDao
 				return "Already Exists!!!";
 			}
 		else {
-				PreparedStatement ps = con.prepareStatement("insert into user values(?,?,?,?,?,?)");
+				PreparedStatement ps = con.prepareStatement("insert into users values(?,?,?,?,?,?,?)");
 				ps.setString(1, rs.getName());
 				ps.setString(2, rs.getEmail());
 				ps.setString(3, rs.getPass());
 				ps.setString(4, rs.getMobile());
-				ps.setInt(5, otp);
-				ps.setString(6, "inactive");
+				ps.setInt(5, accountNo);
+				ps.setInt(6, otp);
+				ps.setString(7, "inactive");
 				
 				int i = ps.executeUpdate();
 				if(i>0)
 				{
-					boolean isSend = SendMail.sendMail(rs.getEmail(), "generated: ", "OTP"+otp);
+					boolean isSend = SendMail.sendMail(rs.getEmail(), "generated: ", "OTP "+otp);
 					if(isSend==true) {
 					return "Successfully Registered!!!";
 					}else {
@@ -79,11 +81,12 @@ public class UserDao
 	 output = "<table border='1'><tr><th>Name</th><th>Email</th>" +
 	 "<th>Password</th>" +
 	 "<th>Mobile</th>" +
+	 "<th>AccountNo</th>" +
 	 "<th>OTP</th>" +
 	 "<th>Status</th>" +
 	 "<th>Update</th><th>Remove</th></tr>";
 
-	 String query = "select * from user";
+	 String query = "select * from users";
 	 
 	 Statement stmt = con.createStatement();
 	 ResultSet rs = stmt.executeQuery(query);
@@ -93,8 +96,9 @@ public class UserDao
 	 {
 	 String name = rs.getString("name");
 	 String email = rs.getString("email");
-	 String password = rs.getString("password");
+	 String password = rs.getString("pass");
 	 String mobile = rs.getString("mobile");
+	 String accountNo = Integer.toString(rs.getInt("accountNo"));
 	 String otp = Integer.toString(rs.getInt("otp"));
 	 String status = rs.getString("status");
 	 
@@ -103,6 +107,7 @@ public class UserDao
 	 output += "<td>" + email + "</td>";
 	 output += "<td>" + password + "</td>";
 	 output += "<td>" + mobile + "</td>";
+	 output += "<td>" + accountNo + "</td>";
 	 output += "<td>" + otp + "</td>";
 	 output += "<td>" + status + "</td>";
 	 // buttons
@@ -134,7 +139,7 @@ public class UserDao
 			 return "Error while connecting to the database for updating."; 
 	     }
 		 // create a prepared statement
-		 String query = "UPDATE user SET name=?,password=?,mobile=? WHERE email=?";
+		 String query = "UPDATE users SET name=?,pass=?,mobile=? WHERE email=?";
 		 PreparedStatement preparedStmt = con.prepareStatement(query);
 		 
 		 // binding values
@@ -168,7 +173,7 @@ public class UserDao
 		 }
 		 
 		 // create a prepared statement
-		 String query = "delete from user where email=?";
+		 String query = "delete from users where email=?";
 		 PreparedStatement preparedStmt = con.prepareStatement(query);
 		 
 		 // binding values
