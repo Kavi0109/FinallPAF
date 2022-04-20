@@ -60,7 +60,7 @@ public class SendMail
 		
 		try {
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("verifyrentbasera@gmail.com"));
+			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			message.setSubject(sub);
 			message.setText(msg);
