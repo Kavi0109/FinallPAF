@@ -1,6 +1,5 @@
 package com.jersey.services;
 
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -19,34 +18,29 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jersey.bean.Payment;
 
-
-
 @Path("/Pay")
 public class PaymentService {
-	
+
 	Payment payObj = new Payment();
-	
+
 	@GET
 	@Path("/get")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String readPayment() {
 		return payObj.readPayment();
 	}
-	
-	
+
 	@POST
 	@Path("/post")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String insertPayment(@FormParam("accountNum") String accountNum,
-							@FormParam("amount") String amount,
-							@FormParam("date") String date)
-		{
+								@FormParam("amount") String amount,
+								@FormParam("date") String date) {
 		String output = payObj.insertPayment(accountNum, amount, date);
 		return output;
-		}
-	
-	
+	}
+
 	@PUT
 	@Path("/put")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -59,12 +53,11 @@ public class PaymentService {
 		String accountNum = paymentObject.get("accountNum").getAsString();
 		String amount = paymentObject.get("amount").getAsString();
 		String date = paymentObject.get("date").getAsString();
-		
+
 		String output = payObj.updatePayment(paymentId, accountNum, amount, date);
 		return output;
 	}
-	
-	
+
 	@DELETE
 	@Path("/delete")
 	@Consumes(MediaType.APPLICATION_XML)
