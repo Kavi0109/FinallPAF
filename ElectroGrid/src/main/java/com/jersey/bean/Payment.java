@@ -33,6 +33,7 @@ public class Payment {
 		}
 		return output;
 	}
+	
 
 	public String readPayment() {
 		String output = "";
@@ -74,6 +75,7 @@ public class Payment {
 		}
 		return output;
 	}
+	
 
 	public String updatePayment(String ID, String account, String amount, String date)
 
@@ -102,6 +104,7 @@ public class Payment {
 		}
 		return output;
 	}
+	
 
 	public String deletePayment(String paymentId) {
 		String output = "";
