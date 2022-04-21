@@ -76,7 +76,7 @@ public class ConnectionService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String deleteConnection(String connectionData)
 	{
-		//Convert the input string to an XML document
+		//Convert the input string to  XML document
 		 Document doc = Jsoup.parse(connectionData, "", Parser.xmlParser());
 	
 		//Read the value from the element <connectionID>
