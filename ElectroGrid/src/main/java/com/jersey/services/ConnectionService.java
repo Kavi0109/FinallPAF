@@ -32,7 +32,7 @@ public class ConnectionService {
 		return connectionObj.readConnections(); 
 	 } 
 	
-	
+	//insert record
 	@POST
 	@Path("/post")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
