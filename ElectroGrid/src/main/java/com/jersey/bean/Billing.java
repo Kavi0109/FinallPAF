@@ -13,8 +13,10 @@ public class Billing {
 			 
 			 try
 			 {
+				 //DB connection
 				 Connection con = DbConnectionProvider.getConnection();
 				 
+				 //Error message when connecting the DB
 				 if (con == null)
 				 {
 					 return "Error while connecting to the database for reading."; 
