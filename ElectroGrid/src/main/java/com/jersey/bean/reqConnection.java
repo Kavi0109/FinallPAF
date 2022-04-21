@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import com.jersey.dbconn.DbConnectionProvider;
+import com.jersey.utils.connectionMail;
 
 public class reqConnection {
 	
@@ -29,40 +30,55 @@ public class reqConnection {
 //			}
 		
 			
-			public String insertConnection(String customerName, String connectionType, String requestLoad,String contractDemand, String address, String email)
-			{
-				String output = "";
-				try
-				{
-					Connection con = DbConnectionProvider.getConnection();
-					 if (con == null)
-						 return "Error while connecting to the database for inserting."; 
-					 // create a prepared statement
-					 String query = " insert into connections(`connectionID`,`customerName`,`connectionType`,`requestLoad`,`contractDemand`,`address`,`email`)" + " values (?, ?, ?, ?, ?, ?, ?)";
-					 PreparedStatement preparedStmt = con.prepareStatement(query);
-					 // binding values
-					 preparedStmt.setInt(1, 0);
-					 preparedStmt.setString(2, customerName);
-					 preparedStmt.setString(3, connectionType);
-					 preparedStmt.setString(4, requestLoad);
-					 preparedStmt.setString(5, contractDemand);
-					 preparedStmt.setString(6, address);
-					 preparedStmt.setString(7, email);
-					 
-					 // execute the statement
-					 
-					 preparedStmt.execute();
-					
-					 output = "Inserted successfully";
-				}
-				catch (Exception e)
-				{
-					 output = "Error while inserting the item.";
-					 System.err.println(e.getMessage());
-				}
-				return output;
-			}
-		
+	public String insertConnection(String customerName, String connectionType, String requestLoad,String contractDemand, String address, String email)
+	{
+		String output = "";
+		try
+		{
+			Connection con = DbConnectionProvider.getConnection();
+			 if (con == null)
+				 return "Error while connecting to the database for inserting."; 
+			 // create a prepared statement
+			 String query = " insert into connections(`connectionID`,`customerName`,`connectionType`,`requestLoad`,`contractDemand`,`address`,`email`)" + " values (?, ?, ?, ?, ?, ?, ?)";
+			 PreparedStatement preparedStmt = con.prepareStatement(query);
+			 // binding values
+			 preparedStmt.setInt(1, 0);
+			 preparedStmt.setString(2, customerName);
+			 preparedStmt.setString(3, connectionType);
+			 preparedStmt.setString(4, requestLoad);
+			 preparedStmt.setString(5, contractDemand);
+			 preparedStmt.setString(6, address);
+			 preparedStmt.setString(7, email);
+			 
+			 // execute the statement
+			 
+			 int i = preparedStmt.executeUpdate();
+			
+//			 output = "Inserted successfully";
+			 if(i>0)
+			 {
+			 boolean isSend = connectionMail.ConnectionMail(email, "generated: ");
+			 if(isSend==true) {
+			 return "Successfully Registered!!!";
+			 }else {
+			 return "Error while sending the email!!";
+			 }
+			 }
+			 else
+			 {
+			 return "Error when registration process!!!";
+			 }
+
+			 
+		}
+		catch (Exception e)
+		{
+			 output = "Error while inserting the item.";
+			 System.err.println(e.getMessage());
+		}
+		return output;
+	}
+
 			public String readConnections()
 			{
 				String output = "";
