@@ -41,16 +41,19 @@ public class Payment {
 	public String readPayment() {
 		String output = "";
 		try {
+			
 			Connection con = DbConnectionProvider.getConnection();
 			if (con == null) {
 				return "Error while connecting to the database for reading.";
 			}
+			
 			// Prepare the html table to be displayed
-			output = "<table border='1'><tr><th>Payment ID</th>" + "<th>Account Number</th>" + "<th>Payment Amount</th>"
-					+ "<th>Payment Date</th>";
+			output = "<table border='1'><tr><th>Payment ID</th>" + "<th>Account Number</th>" + "<th>Payment Amount</th>" + "<th>Payment Date</th>";
+			
 			String query = "select * from payment";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
+			
 			// iterate through the rows in the result set
 			while (rs.next()) {
 				String paymentId = Integer.toString(rs.getInt("paymentId"));
@@ -69,9 +72,10 @@ public class Payment {
 						+ "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'>"
 						+ "<input name='paymentId' type='hidden' value='" + paymentId + "'>" + "</form></td></tr>";
 			}
-			// con.close();
+			
 			// Complete the html table
 			output += "</table>";
+			
 		} catch (Exception e) {
 			output = "Error while reading the items.";
 			System.err.println(e.getMessage());
