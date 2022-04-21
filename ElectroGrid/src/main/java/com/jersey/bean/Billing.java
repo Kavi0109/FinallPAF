@@ -77,7 +77,9 @@ public class Billing {
 		 String output = "";
 		 try
 		 {
+			 	//DB connection
 			 	Connection con = DbConnectionProvider.getConnection();
+			 	
 				 if (con == null)
 				 {
 					 return "Error while connecting to the database for inserting."; 
@@ -137,6 +139,7 @@ public class Billing {
 		 
 		 try
 		 {
+			//DB connection
 			 Connection con = DbConnectionProvider.getConnection();
 			 
 			 if (con == null)
@@ -180,7 +183,10 @@ public class Billing {
 		 
 		 try
 		 {
+			//DB connection
 			 Connection con = DbConnectionProvider.getConnection();
+			 
+			 
 			 if (con == null)
 			 {
 				 return "Error while connecting to the database for deleting."; 
