@@ -6,7 +6,7 @@ import com.jersey.dbconn.DbConnectionProvider;
 public class Billing {
 	
 	
-	//Retrieve Bills
+	//Retrieve the bills
 		public String readBills()
 		{
 			 String output = "";
@@ -71,7 +71,7 @@ public class Billing {
 		
 
 	
-	//Insert Bills	
+	//Insert the bills
 	public String insertBills(String BillCode, String BillMonth, int CurrentRead, int PreviousRead, int TotalUnits , String FinalAmount)
 	{
 		 String output = "";
@@ -132,7 +132,7 @@ public class Billing {
 	
 	
 	
-	//Update
+	//Update 
 	public String UpdateBills(String BillID,String BillCode, String BillMonth, String CurrentRead, String PreviousRead, String TotalUnits , String FinalAmount)
 	{
 		 String output = "";
