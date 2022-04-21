@@ -80,6 +80,7 @@ public class Billing {
 			 	//DB connection
 			 	Connection con = DbConnectionProvider.getConnection();
 			 	
+			 	//Error message when connecting the DB
 				 if (con == null)
 				 {
 					 return "Error while connecting to the database for inserting."; 
@@ -139,9 +140,10 @@ public class Billing {
 		 
 		 try
 		 {
-			//DB connection
+			 //DB connection
 			 Connection con = DbConnectionProvider.getConnection();
 			 
+			//Error message when connecting the DB
 			 if (con == null)
 			 {
 				 return "Error while connecting to the database for updating."; 
