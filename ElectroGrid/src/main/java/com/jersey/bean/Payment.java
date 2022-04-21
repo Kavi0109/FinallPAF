@@ -10,13 +10,15 @@ public class Payment {
 		String output = "";
 		try {
 			Connection con = DbConnectionProvider.getConnection();
-			;
+			
 			if (con == null) {
 				return "Error while connecting to the database for inserting.";
 			}
+			
 			// create a prepared statement
 			String query = " insert into payment(`paymentId`,`accountNum`,`amount`,`date`)" + " values (?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
+			
 			// binding values
 			preparedStmt.setInt(1, 0);
 			preparedStmt.setString(2, account);
@@ -25,8 +27,9 @@ public class Payment {
 
 			// execute the statement
 			preparedStmt.execute();
-			// con.close();
+			
 			output = "Inserted successfully";
+			
 		} catch (Exception e) {
 			output = "Error while inserting the item.";
 			System.err.println(e.getMessage());
