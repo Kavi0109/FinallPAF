@@ -6,7 +6,7 @@ import com.jersey.dbconn.DbConnectionProvider;
 
 public class Payment {
 /*
-	// To connect to the DB
+	
 	private Connection connect() {
 		Connection con = null;
 		try {
