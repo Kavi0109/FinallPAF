@@ -93,18 +93,22 @@ public class Payment {
 			if (con == null) {
 				return "Error while connecting to the database for updating.";
 			}
+			
 			// create a prepared statement
 			String query = "UPDATE payment SET accountNum=?,amount=?,date=?WHERE paymentId=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
+			
 			// binding values
 			preparedStmt.setString(1, account);
 			preparedStmt.setDouble(2, Double.parseDouble(amount));
 			preparedStmt.setString(3, date);
 			preparedStmt.setInt(4, Integer.parseInt(ID));
+			
 			// execute the statement
 			preparedStmt.execute();
 			// con.close();
 			output = "Updated successfully";
+			
 		} catch (Exception e) {
 			output = "Error while updating the payment.";
 			System.err.println(e.getMessage());
@@ -120,15 +124,19 @@ public class Payment {
 			if (con == null) {
 				return "Error while connecting to the database for deleting.";
 			}
+			
 			// create a prepared statement
 			String query = "delete from payment where paymentId=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
+			
 			// binding values
 			preparedStmt.setInt(1, Integer.parseInt(paymentId));
+			
 			// execute the statement
 			preparedStmt.execute();
-			// con.close();
+			
 			output = "Deleted successfully";
+			
 		} catch (Exception e) {
 			output = "Error while deleting the payment.";
 			System.err.println(e.getMessage());
