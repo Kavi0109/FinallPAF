@@ -90,7 +90,7 @@ public class Billing {
 				 
 				 
 			 
-				 //Calculate the bill
+				 //Calculate the bill amount
 				 double bill_amount ;
 				 TotalUnits = CurrentRead-PreviousRead;
 				 
