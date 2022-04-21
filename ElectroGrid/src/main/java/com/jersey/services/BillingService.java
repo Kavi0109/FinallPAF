@@ -21,7 +21,7 @@ public class BillingService
 {
 	Billing BillObj = new Billing();
 	
-	//Read
+	//Read the bills
 	@GET
 	@Path("/get")
 	@Produces(MediaType.TEXT_HTML)
@@ -31,7 +31,7 @@ public class BillingService
 	 }
 
 
-	//Insert
+	//Insert the bills
 		@POST
 		@Path("/post")
 		@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -50,7 +50,7 @@ public class BillingService
 		
 		
 	
-	//Update
+	//Update the bills
 	@PUT
 	@Path("/put")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -79,7 +79,7 @@ public class BillingService
 	
 	
 	
-	//Delete
+	//Delete the bills
 	@DELETE
 	@Path("/delete")
 	@Consumes(MediaType.APPLICATION_XML)
