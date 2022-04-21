@@ -22,7 +22,7 @@ public class Billing {
 					 return "Error while connecting to the database for reading."; 
 				 }
 				 
-				 // Prepare the html table to be displayed
+				 // Prepare the HTML table to be displayed
 				 output = "<table border='1'><tr><th>Bill Code</th><th>Bill Month</th>" +
 						 "<th>Current Reading</th>" +
 						 "<th>Previous Reading</th>" +
@@ -48,7 +48,7 @@ public class Billing {
 					 String FinalAmount = Double.toString(rs.getDouble("FinalAmount"));
 					 
 					 
-					 // Add into the html table
+					 // Add into the HTML table
 					 output += "<tr><td>" + BillCode + "</td>";
 					 output += "<td>" + BillMonth + "</td>";
 					 output += "<td>" + CurrentRead + "</td>";
@@ -60,7 +60,7 @@ public class Billing {
 				 }
 				
 				 
-				 // Complete the html table
+				 // Complete the HTML table
 				 output += "</table>";
 			 }
 			 catch (Exception e)
