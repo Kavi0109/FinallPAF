@@ -45,7 +45,7 @@ public class ConnectionService {
 	 @FormParam("email") String email)
 	{
 		 String output = connectionObj.insertConnection(customerName, connectionType, requestLoad, contractDemand, address, email);
-		return output;
+		 return output;
 	}
 	
 	@PUT
