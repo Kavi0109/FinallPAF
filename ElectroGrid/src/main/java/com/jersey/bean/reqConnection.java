@@ -10,7 +10,7 @@ import com.jersey.dbconn.DbConnectionProvider;
 
 public class reqConnection {
 	
-			//A common method to connect to the DB
+			//A common method to connect to the 
 //			private Connection connect()
 //			{
 //				 Connection con = null;
