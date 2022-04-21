@@ -5,20 +5,7 @@ import java.sql.*;
 import com.jersey.dbconn.DbConnectionProvider;
 
 public class Payment {
-/*
-	
-	private Connection connect() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			// Provide the correct details: DBServer/DBName, username, password
-			con = DriverManager.getConnection("jdbc:mysql://root@localhost:3306/paf", "root", "mysql");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return con;
-	}*/
-	
+
 	
 	public String insertPayment(String account, String amount,String date) {
 		String output = "";
