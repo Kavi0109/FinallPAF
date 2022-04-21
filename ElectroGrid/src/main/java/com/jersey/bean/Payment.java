@@ -24,7 +24,6 @@ public class Payment {
 			preparedStmt.setString(4, date);
 			
 			// execute the statement
-
 			preparedStmt.execute();
 			//con.close();
 			output = "Inserted successfully";
