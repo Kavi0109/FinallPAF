@@ -37,7 +37,7 @@ public class reqConnection {
 					Connection con = DbConnectionProvider.getConnection();
 					 if (con == null)
 						 return "Error while connecting to the database for inserting."; 
-					 // create a prepared stat
+					 // create a prepared statement
 					 String query = " insert into connections(`connectionID`,`customerName`,`connectionType`,`requestLoad`,`contractDemand`,`address`,`email`)" + " values (?, ?, ?, ?, ?, ?, ?)";
 					 PreparedStatement preparedStmt = con.prepareStatement(query);
 					 // binding values
