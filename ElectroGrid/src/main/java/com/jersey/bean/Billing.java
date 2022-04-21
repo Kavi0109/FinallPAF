@@ -132,7 +132,7 @@ public class Billing {
 	
 	
 	
-	//Update 
+	//Update the bills
 	public String UpdateBills(String BillID,String BillCode, String BillMonth, String CurrentRead, String PreviousRead, String TotalUnits , String FinalAmount)
 	{
 		 String output = "";
@@ -176,7 +176,7 @@ public class Billing {
 	}
 	
 	
-	//Delete Bills
+	//Delete the bills
 	public String deleteBills(String BillID)
 	{
 		 String output = "";
