@@ -87,14 +87,15 @@ public class Billing {
 				 {
 					 return "Error while connecting to the database for inserting."; 
 				 }
+				 
+				 
 			 
 				 //Calculate the bill
-				 
 				 double bill_amount ;
 				 TotalUnits = CurrentRead-PreviousRead;
 				 
 				 
-				 //Multiplying the total units from the Per unit charge
+				 //Multiplying the total units from the Per unit charge and get the final amount
 				 bill_amount = 6 * TotalUnits;
 			 
 			 
