@@ -25,7 +25,7 @@ public class PaymentService {
 
 	@GET
 	@Path("/get")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.TEXT_HTML)
 	public String readPayment() {
 		return payObj.readPayment();
 	}
