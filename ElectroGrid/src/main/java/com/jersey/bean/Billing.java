@@ -88,7 +88,6 @@ public class Billing {
 					 return "Error while connecting to the database for inserting."; 
 				 }
 				 
-				 
 			 
 				 //Calculate the bill amount
 				 double bill_amount ;
@@ -114,6 +113,7 @@ public class Billing {
 			 preparedStmt.setInt(5, PreviousRead);
 			 preparedStmt.setInt(6, TotalUnits);
 			 preparedStmt.setDouble(7, bill_amount);
+			 
 			 
 			 // execute the statement
 			 preparedStmt.execute();

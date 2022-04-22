@@ -12,28 +12,28 @@ import javax.mail.internet.MimeMessage;
 
 
 
-public class SendMail 
+public class SendBills 
 {
 	private String email;
 	private String msg;
-	private String sub;
 	
-	public SendMail(String email, String msg, String sub)
+	
+	public SendBills(String email, String msg)
 	{
 		super();
 		this.email = email;
 		this.msg = msg;
-		this.sub = sub;
+		
 	}
 	
-	public SendMail()
+	public SendBills()
 	{}
 	
-	public static boolean sendMail(String email, String message, String sub)
+	public static boolean sendBills(String email, String message)
 	{
 		System.out.println("Email has been sent to user "+ message);
 		boolean isSent = false;
-		isSent = new SendMail(email, message, sub).sendSimpleMail();
+		isSent = new SendBills(email, message).sendSimpleMail();
 		return isSent;
 	}
 	
@@ -62,7 +62,7 @@ public class SendMail
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-			message.setSubject(sub);
+			
 			message.setText(msg);
 			Transport.send(message);
 			isSent=true;
