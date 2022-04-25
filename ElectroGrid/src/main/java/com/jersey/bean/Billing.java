@@ -217,4 +217,75 @@ public class Billing {
 		 }
 		 return output;
 	} 	
+	
+	
+	
+	
+	
+	
+	
+	
+	public String readConnections(String Id)
+	 {
+		
+		int convertedID = Integer.parseInt(Id);
+		 String output = "";
+		 try
+		 {
+			 Connection con = DbConnectionProvider.getConnection();
+			 
+			 
+			 if (con == null)
+				 return "Error while connecting to the database for reading.";
+			 
+			 
+			 
+			 // Prepare the HTML table to be displayed
+			 output = "<table border='1'><tr><th>Bill Code</th><th>Bill Month</th>" + "<th>Current Read</th>" + "<th>Previous Read</th>" + "<th>Total Units</th>" + "<th>Final Amount</th></tr>";
+				
+			 String query = "select * from bills where BillID='"+convertedID+"'";
+			 Statement stmt = con.createStatement();
+			 ResultSet rs = stmt.executeQuery(query);
+			 // iterate through the rows in the result set
+			 while (rs.next())
+			 {
+				 String BillID = Integer.toString(rs.getInt("BillID"));
+				 String BillCode = rs.getString("BillCode");
+				 String BillMonth = rs.getString("BillMonth");
+				 String CurrentRead = Double.toString(rs.getDouble("CurrentRead"));
+				 String PreviousRead = Double.toString(rs.getDouble("PreviousRead"));
+				 String TotalUnits = Double.toString(rs.getDouble("TotalUnits"));
+				 String FinalAmount = Double.toString(rs.getDouble("FinalAmount"));
+				 
+				 
+				 
+				 
+				// Add into the HTML table
+				 output += "<tr><td>" + BillCode + "</td>";
+				 output += "<td>" + BillMonth + "</td>";
+				 output += "<td>" + CurrentRead + "</td>";
+				 output += "<td>" + PreviousRead + "</td>";
+				 output += "<td>" + TotalUnits + "</td>";
+				 output += "<td>" + FinalAmount + "</td>";
+				 
+			 }
+			
+			 // Complete the HTML table
+			 output += "</table>";
+		 }
+		 catch (Exception e)
+		 {
+			 output = "Error while reading the Bills.";
+			 System.err.println(e.getMessage());
+		 }
+		 return output;
+	}
+	 
+	
+	
+	
+	
+	
+	
+	
 }

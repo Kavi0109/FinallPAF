@@ -96,4 +96,19 @@ public class BillingService
 	}
 	
 	
+	
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.TEXT_HTML)
+	public String readConnections(@PathParam("id") String id) 
+	 {
+		return BillObj.readConnections(id); 
+	 }
+	
+	
+	
+	
+	
+	
+	
 }

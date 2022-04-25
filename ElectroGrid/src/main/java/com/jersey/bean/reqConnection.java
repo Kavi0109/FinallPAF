@@ -159,6 +159,14 @@ public class reqConnection {
 				 }
 				 return output;
 			}
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
 			
 			public String updateConnection(String ID, String customerName, String connectionType, String requestLoad,String contractDemand,String address, String email)
 			{
